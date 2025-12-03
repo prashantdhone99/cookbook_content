@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="wk-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#ffcc33"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="32" fill="url(#wk-gradient)"/>
+  <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M120 250c40-70 200-70 240 0s160 40 220-30"/>
+    <path d="M120 210c40-70 200-70 240 0s160 40 220-30"/>
+  </g>
+  <path d="M220 140h160l-20 90H240z" fill="#fff5e6"/>
+  <path d="M240 140c20-50 120-50 140 0" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="260" cy="240" r="20" fill="#fff"/>
+  <circle cx="340" cy="240" r="20" fill="#fff"/>
+  <text x="300" y="90" fill="#fff" font-size="36" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">Weeknight Dinners</text>
+</svg>
+
+

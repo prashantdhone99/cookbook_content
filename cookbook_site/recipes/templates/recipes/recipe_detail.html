@@ -1,0 +1,73 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+
+{% block title %}{{ recipe.title }} · PPJ Recipe Share{% endblock %}
+
+{% block content %}
+<article class="recipe-detail">
+    <header class="detail-hero">
+        {% if recipe.uploaded_image %}
+            <img src="{{ recipe.uploaded_image.url }}" alt="{{ recipe.title }}">
+        {% else %}
+            <img src="{% static recipe.hero_image %}" alt="{{ recipe.title }}">
+        {% endif %}
+        <div class="detail-overlay">
+            <h1>{{ recipe.title }}</h1>
+            {% if recipe.subtitle %}
+                <p class="subtitle">{{ recipe.subtitle }}</p>
+            {% endif %}
+            <ul class="meta">
+                <li><strong>Prep:</strong> {{ recipe.prep_time }} mins</li>
+                <li><strong>Cook:</strong> {{ recipe.cook_time }} mins</li>
+                <li><strong>Serves:</strong> {{ recipe.servings }}</li>
+            </ul>
+        </div>
+    </header>
+    <section class="detail-body">
+        <div class="detail-summary">
+            <h2>Overview</h2>
+            <p>{{ recipe.short_description }}</p>
+        </div>
+        <div class="detail-columns">
+            <section>
+                <div class="ingredients-header">
+                    <h2>Ingredients</h2>
+                    <button class="voice-assistant-btn" id="voiceAssistantBtn" aria-label="Ask about ingredients or recipe ingredients">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                        <span>Voice Assistant</span>
+                    </button>
+                </div>
+                <div class="voice-assistant-panel" id="voiceAssistantPanel" style="display: none;">
+                    <div class="voice-status" id="voiceStatus">Click the microphone to ask about ingredients or recipe ingredients</div>
+                    <div class="voice-response" id="voiceResponse"></div>
+                </div>
+                <ul class="ingredients-list">
+                    {% for item in recipe.ingredients.splitlines %}
+                        {% if item %}
+                            <li>{{ item }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </section>
+            <section>
+                <h2>Directions</h2>
+                <ol class="directions-list">
+                    {% for step in recipe.directions.splitlines %}
+                        {% if step %}
+                            <li>{{ step }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </section>
+        </div>
+        <a class="button back-button" href="{% url 'recipes:home' %}">← Back to recipes</a>
+    </section>
+</article>
+<script src="{% static 'recipes/js/voice-assistant.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="veg-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64e37b"/>
+      <stop offset="100%" stop-color="#00b37a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="32" fill="url(#veg-gradient)"/>
+  <g fill="#fff" opacity="0.9">
+    <circle cx="180" cy="200" r="70"/>
+    <circle cx="260" cy="150" r="60" opacity="0.8"/>
+    <circle cx="320" cy="220" r="60" opacity="0.7"/>
+    <circle cx="400" cy="180" r="65" opacity="0.85"/>
+  </g>
+  <path d="M180 200c30-60 120-60 150 0" fill="none" stroke="#00a96e" stroke-width="12" stroke-linecap="round"/>
+  <path d="M250 120c20-40 80-40 100 0" fill="none" stroke="#008c5f" stroke-width="8" stroke-linecap="round"/>
+  <text x="300" y="90" fill="#fff" font-size="36" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">Veggie Delights</text>
+</svg>
+
+

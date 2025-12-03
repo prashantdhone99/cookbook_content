@@ -1,0 +1,205 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+
+{% block title %}PPJ Recipe Share{% endblock %}
+
+{% block content %}
+{% with featured|first as hero_recipe %}
+<section class="hero">
+    <div class="hero-text">
+        <span class="tagline">Share. Cook. Celebrate.</span>
+        <h1>Discover flavors crafted by the PPJ Recipe Share community</h1>
+        <p>Browse inspiring recipes, learn new kitchen skills, and publish your own dishes with beautiful step-by-step guides.</p>
+        <div class="hero-actions">
+            <a class="button" href="{% url 'recipes:create' %}">Submit your recipe</a>
+            <a class="button ghost" href="#trending">Explore trending</a>
+        </div>
+        <dl class="hero-stats">
+            <div>
+                <dt>Featured recipes</dt>
+                <dd>{{ featured|length }}</dd>
+            </div>
+            <div>
+                <dt>Community favorites</dt>
+                <dd>{{ recipes|length }}</dd>
+            </div>
+            <div>
+                <dt>New this week</dt>
+                <dd>{{ latest_recipes|length }}</dd>
+            </div>
+        </dl>
+    </div>
+    {% if hero_recipe %}
+    <div class="hero-visual">
+        {% if hero_recipe.uploaded_image %}
+            <img src="{{ hero_recipe.uploaded_image.url }}" alt="{{ hero_recipe.title }}">
+        {% else %}
+            <img src="{% static hero_recipe.hero_image %}" alt="{{ hero_recipe.title }}">
+        {% endif %}
+        <div class="hero-card">
+            <span class="label">Spotlight</span>
+            <h3>{{ hero_recipe.title }}</h3>
+            <p>{{ hero_recipe.short_description }}</p>
+            <a href="{% url 'recipes:detail' slug=hero_recipe.slug %}">Cook this dish →</a>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endwith %}
+
+<section class="google-search-section">
+    <div class="search-container">
+        <h2 class="search-title">Which Type of food You Want</h2>
+        <form action="{% url 'recipes:search' %}" method="get" class="google-search-form">
+            <div class="search-wrapper">
+                <input type="text" name="q" placeholder="Search for recipes, cuisines, ingredients..." class="search-input" required>
+                <button type="submit" class="search-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="trending" id="trending">
+    <div class="section-heading">
+        <div>
+            <h2>Trending Now</h2>
+            <p>Popular picks the community can’t stop sharing.</p>
+        </div>
+        <a class="link" href="{% url 'recipes:create' %}">Add yours</a>
+    </div>
+    <div class="trending-rail">
+        {% for recipe in recipes|slice:":8" %}
+            <article class="trend-card">
+                <a href="{% url 'recipes:detail' slug=recipe.slug %}">
+                    {% if recipe.uploaded_image %}
+                        <img src="{{ recipe.uploaded_image.url }}" alt="{{ recipe.title }}">
+                    {% else %}
+                        <img src="{% static recipe.hero_image %}" alt="{{ recipe.title }}">
+                    {% endif %}
+                    <div class="trend-body">
+                        <h3>{{ recipe.title }}</h3>
+                        <span>{{ recipe.prep_time }} min prep · Serves {{ recipe.servings }}</span>
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="collections">
+    <header class="section-header">
+        <h2>Curated Collections</h2>
+        <p>Find your next favorite dish by mood, cuisine, or cooking style.</p>
+    </header>
+    <div class="collection-grid">
+        <a class="collection-tile morning" href="#">
+            <div>
+                <span>Rise & Shine</span>
+                <h3>Breakfast Boost</h3>
+                <p>Smooth bowls, fluffy pancakes, and energy-packed bites.</p>
+            </div>
+        </a>
+        <a class="collection-tile vibrant" href="#">
+            <div>
+                <span>Colorful Plates</span>
+                <h3>Veggie Celebration</h3>
+                <p>Plant-based dishes layered with aromatic spices.</p>
+            </div>
+        </a>
+        <a class="collection-tile cozy" href="#">
+            <div>
+                <span>Slow Simmer</span>
+                <h3>Comfort Classics</h3>
+                <p>Soups, braises, and stews to warm every gathering.</p>
+            </div>
+        </a>
+        <a class="collection-tile wander" href="#">
+            <div>
+                <span>Passport to Flavor</span>
+                <h3>Global Adventures</h3>
+                <p>Street-food favorites and festival-worthy feasts.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section class="latest-recipes">
+    <header class="section-header">
+        <h2>Fresh from the community</h2>
+        <p>Newly published recipes ready to join your weekly menu.</p>
+    </header>
+    <div class="cards compact">
+        {% for recipe in latest_recipes %}
+            <article class="card">
+                <a href="{% url 'recipes:detail' slug=recipe.slug %}" class="card-image">
+                    {% if recipe.uploaded_image %}
+                        <img src="{{ recipe.uploaded_image.url }}" alt="{{ recipe.title }}">
+                    {% else %}
+                        <img src="{% static recipe.hero_image %}" alt="{{ recipe.title }}">
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h3><a href="{% url 'recipes:detail' slug=recipe.slug %}">{{ recipe.title }}</a></h3>
+                    <p>{{ recipe.short_description }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+    <div class="cta-row">
+        <a class="button" href="{% url 'recipes:create' %}">Share Your Recipe</a>
+    </div>
+</section>
+
+<section class="experience">
+    <div class="experience-card">
+        <h2>Cooking together has never been easier</h2>
+        <p>Create beautiful recipe pages with ingredient checklists, timed steps, and prep tips. Invite friends to cook along and leave reviews.</p>
+        <ul>
+            <li>Upload custom images and step notes</li>
+            <li>Organize ingredients by section</li>
+            <li>Highlight dietary & spice levels</li>
+        </ul>
+        <a class="button" href="{% url 'recipes:create' %}">Start creating</a>
+    </div>
+    <div class="experience-card alt">
+        <h2>Stay inspired each week</h2>
+        <p>Receive a curated digest of trending recipes, seasonal menus, and chef-led tutorials designed to grow your kitchen confidence.</p>
+        <form class="subscribe-form">
+            <input type="email" placeholder="Email address">
+            <button type="button">Join the newsletter</button>
+        </form>
+        <p class="mini-note">No spam—just flavorful ideas.</p>
+    </div>
+</section>
+
+<section class="kitchen-tips">
+    <header class="section-header">
+        <h2>Kitchen wisdom</h2>
+        <p>Level up every dish with simple techniques our community swears by.</p>
+    </header>
+    <div class="tips-grid">
+        <article class="tip-card">
+            <h3>Prep Like a Pro</h3>
+            <p>Keep a “mise en place” bowl handy so ingredients are measured and ready before you turn on the heat.</p>
+        </article>
+        <article class="tip-card">
+            <h3>Season in Layers</h3>
+            <p>Add pinches of salt as you build a dish to coax natural flavors rather than waiting until the very end.</p>
+        </article>
+        <article class="tip-card">
+            <h3>Sear, Then Simmer</h3>
+            <p>Brown proteins over medium-high heat for savory depth, then lower temperatures to finish gently.</p>
+        </article>
+        <article class="tip-card">
+            <h3>Balance with Acid</h3>
+            <p>A squeeze of citrus or splash of vinegar just before serving brightens sauces, soups, and stews.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

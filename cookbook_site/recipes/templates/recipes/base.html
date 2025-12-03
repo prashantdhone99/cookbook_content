@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PPJ Recipe Share{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a class="logo" href="{% url 'recipes:home' %}">
+                <img src="{% static 'recipes/images/logo.svg' %}" alt="PPJ Recipe Share">
+                <span>PPJ Recipe Share</span>
+            </a>
+            <nav class="primary-nav">
+                <a href="{% url 'recipes:home' %}">Home</a>
+                <a href="{% url 'recipes:create' %}">Share a recipe</a>
+                <form action="{% url 'recipes:search' %}" method="get" class="header-search-form">
+                    <input type="text" name="q" placeholder="Search recipes..." class="header-search-input">
+                    <button type="submit" class="header-search-button" aria-label="Search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </form>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="footer-columns">
+            <div>
+                <h4>About</h4>
+                <p>Your daily dose of kitchen inspiration and cooking confidence.</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>Email: hello@cookbookcompanion.test</p>
+            </div>
+            <div>
+                <h4>Follow</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">
+                        <img src="{% static 'recipes/images/icon-instagram.svg' %}" alt="Instagram">
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <img src="{% static 'recipes/images/icon-pinterest.svg' %}" alt="Pinterest">
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <img src="{% static 'recipes/images/icon-youtube.svg' %}" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-note">© {% now "Y" %} PPJ Recipe Share. Crafted with flavor.</p>
+    </footer>
+    <script src="{% static 'recipes/js/slider.js' %}"></script>
+</body>
+</html>
+

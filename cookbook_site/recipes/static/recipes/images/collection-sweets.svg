@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="sw-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9a9e"/>
+      <stop offset="100%" stop-color="#fad0c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="32" fill="url(#sw-gradient)"/>
+  <g fill="#fff" opacity="0.9">
+    <path d="M170 240c0-70 260-70 260 0 0 40-50 70-130 70s-130-30-130-70z"/>
+    <path d="M220 210c0-40 160-40 160 0s-35 40-80 40-80-18-80-40z" opacity="0.7"/>
+    <circle cx="250" cy="170" r="20"/>
+    <circle cx="350" cy="170" r="20"/>
+  </g>
+  <path d="M240 150c40-30 80-30 120 0" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+  <text x="300" y="90" fill="#fff" font-size="36" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">Sweet Treats</text>
+</svg>
+
+

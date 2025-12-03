@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <defs>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#36d1dc"/>
+      <stop offset="100%" stop-color="#5b86e5"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe29f"/>
+      <stop offset="100%" stop-color="#ffa99f"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#ocean)"/>
+  <circle cx="760" cy="140" r="100" fill="url(#sun)" opacity="0.8"/>
+  <path d="M120 320c60 10 140-60 200-60s120 70 180 70 150-60 210-60 110 40 150 40" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  <path d="M200 360h560" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+  <path d="M240 260c40-40 120-40 160 0s120 40 160 0 120-40 160 0" fill="none" stroke="#ffe29f" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="480" y="120" fill="#fff" font-size="64" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    Citrus Herb Salmon
+  </text>
+</svg>
+
+
+

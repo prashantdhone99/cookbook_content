@@ -1,0 +1,86 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+
+{% block title %}Search Results{% if query %} for "{{ query }}"{% endif %} · PPJ Recipe Share{% endblock %}
+
+{% block content %}
+<section class="search-results">
+    <div class="search-results-header">
+        <h1>Search Results</h1>
+        {% if query %}
+            <p class="search-query">Showing results for "<strong>{{ query }}</strong>"</p>
+        {% else %}
+            <p>Please enter a search term to find recipes.</p>
+        {% endif %}
+    </div>
+
+    {% if query %}
+        <div class="search-form-inline">
+            <form action="{% url 'recipes:search' %}" method="get" class="inline-search-form">
+                <div class="search-wrapper">
+                    <input type="text" name="q" value="{{ query }}" placeholder="Search for recipes, cuisines, ingredients..." class="search-input" required>
+                    <button type="submit" class="search-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if recipes %}
+            <div class="results-summary">
+                <p>Found <strong>{{ results_count }}</strong> recipe{{ results_count|pluralize }} matching your search.</p>
+            </div>
+            <div class="cards">
+                {% for recipe in recipes %}
+                    <article class="card">
+                        <a href="{% url 'recipes:detail' slug=recipe.slug %}" class="card-image">
+                            {% if recipe.uploaded_image %}
+                                <img src="{{ recipe.uploaded_image.url }}" alt="{{ recipe.title }}">
+                            {% else %}
+                                <img src="{% static recipe.hero_image %}" alt="{{ recipe.title }}">
+                            {% endif %}
+                        </a>
+                        <div class="card-body">
+                            <h3><a href="{% url 'recipes:detail' slug=recipe.slug %}">{{ recipe.title }}</a></h3>
+                            {% if recipe.subtitle %}
+                                <p class="card-subtitle">{{ recipe.subtitle }}</p>
+                            {% endif %}
+                            <p>{{ recipe.short_description }}</p>
+                            <ul class="meta">
+                                <li><strong>Prep:</strong> {{ recipe.prep_time }} mins</li>
+                                <li><strong>Cook:</strong> {{ recipe.cook_time }} mins</li>
+                                <li><strong>Serves:</strong> {{ recipe.servings }}</li>
+                            </ul>
+                            <a class="button secondary" href="{% url 'recipes:detail' slug=recipe.slug %}">
+                                View Recipe
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <h2>No recipes found</h2>
+                <p>We couldn't find any recipes matching "<strong>{{ query }}</strong>".</p>
+                <p>Try searching with different keywords or <a href="{% url 'recipes:create' %}">add your own recipe</a>.</p>
+                <a class="button" href="{% url 'recipes:home' %}">Back to Home</a>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="no-results">
+            <p>Please enter a search term to find recipes.</p>
+            <a class="button" href="{% url 'recipes:home' %}">Back to Home</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+
